@@ -58,7 +58,7 @@ class UserController {
     
             const result = await mysqlConnection.execute("DELETE FROM fornecedor.fornecedores WHERE id = ?", [userId]);
     
-            if (result[0].affectedRows === 0) {
+            if ((result[0] as any).affectedRows === 0) {
                 throw new AppError("Usuário não encontrado.");
             }
     
@@ -68,6 +68,7 @@ class UserController {
             return response.status(500).json({ error: 'Erro interno do servidor' });
         }
     }
+    
 }
 
 export default UserController;
